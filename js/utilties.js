@@ -5,6 +5,8 @@
  * descripcion: descripcion de la factura
  * estado: estado de la factura - pendiente o pagada
  * fecha: fecha en la se igresó la factura
+ * 
+ * 
  */
 export const facturas = [
     { id: 1, numeroFactura: "F001", descripcion: "Compra de muebles de oficina", estado: "pagada", fecha: "12-10-2023" },

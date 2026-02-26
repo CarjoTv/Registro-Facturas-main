@@ -5,68 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App de Contactos</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <script defer src="./js/main.js" type="module"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/main.js" type="module" defer></script>
 </head>
 
-<body>
-    <div class="container">
-        <h1>Lista de Facturas</h1>
-        <nav class="nav">
-            <ul class="nav_list">
-                <li id="todos" class="list_item">Todos</li>
-                <li id="pendientes" class="list_item">Pendientes</li>
-                <li id="pagada" class="list_item">Pagadas</li>
+<body class="bg-[#f4f4f4] font-sans">
+    <div class="container mx-auto max-w-200 my-5 p-5 bg-white shadow-[0_0_10px_rgba(0,0,0,0.1)] relative">
+        <h1 class="text-2xl font-bold mb-4">Lista de Facturas</h1>
+        
+        <button id="addContactBtn" class="addBtn absolute top-5 right-5 bg-blue-600 hover:bg-blue-800 text-white rounded-full px-3 py-1 text-3xl leading-none transition-colors cursor-pointer">
+            +
+        </button>
+
+        <nav class="w-full p-4 mb-4">
+            <ul class="flex justify-evenly list-none">
+                <li id="todos" class="cursor-pointer px-2 py-1 text-white rounded bg-blue-600 hover:bg-blue-400 active:bg-blue-700">Todos</li>
+                <li id="pendientes" class="cursor-pointer px-2 py-1 text-white rounded bg-red-600 hover:bg-red-400 active:bg-red-800">Pendientes</li>
+                <li id="pagadas" class="cursor-pointer px-2 py-1 text-white rounded bg-green-600 hover:bg-green-400 active:bg-green-800">Pagadas</li>
             </ul>
         </nav>
 
-        <table id="tablaFacturas">
+        <table id="tablaFacturas" class="w-full border-collapse">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Número Factura</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Fecha</th>
-                    <th>Action</th>
+                <tr class="bg-gray-100">
+                    <th class="border border-gray-300 p-2 text-left">ID</th>
+                    <th class="border border-gray-300 p-2 text-left">Número Factura</th>
+                    <th class="border border-gray-300 p-2 text-left">Descripción</th>
+                    <th class="border border-gray-300 p-2 text-left">Estado</th>
+                    <th class="border border-gray-300 p-2 text-left">Fecha</th>
+                    <th class="border border-gray-300 p-2 text-left">Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>F001</td>
-                    <td>Compra de muebles de oficina</td>
-                    <td style="color: #00ce00;">pagada</td>
-                    <td>12-10-2023</td>
-                    <td><button class="action">Del</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>F002</td>
-                    <td>Suscripción a servicio de internet</td>
-                    <td style="color: #ff0000;">pendiente</td>
-                    <td>05-02-2024</td>
-                    <td><button>Del</button></td>
-                </tr>
+            <tbody id="cuerpoTabla">
+                <!-- Las filas se generarán dinámicamente desde JavaScript -->
             </tbody>
         </table>
-        <button class="addBtn" id="addContactBtn">+</button>
     </div>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Agregar Factura</h2>
+    <div id="modal" class="hidden fixed inset-0 z-100 w-full h-full bg-black/40 items-center justify-center">
+        <div class="bg-[#fefefe] mx-auto my-[10%] p-5 border border-gray-400 rounded-md w-[80%] max-w-100 h-fit relative">
+            <span id="closeModal" class="close float-right text-3xl font-bold text-gray-400 hover:text-black cursor-pointer leading-none">&times;</span>
+            <h2 class="py-4 text-xl font-bold">Agregar Factura</h2>
             <form id="contactForm">
-                <label for="factura">Numero de Factura:</label>
-                <input type="text" id="factura" name="factura" required>
-                <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" required>
-                <label for="estado">Estado:</label>
-                <input type="text" id="estado" name="estado" required>
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required>
-                <button type="submit">Agregar</button>
+                <label for="factura" class="block mb-2 font-medium">Numero de Factura:</label>
+                <input type="text" id="factura" name="factura" required class="w-full p-2 mb-4 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                
+                <label for="descripcion" class="block mb-2 font-medium">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" required class="w-full p-2 mb-4 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                
+                <label for="estado" class="block mb-2 font-medium">Estado:</label>
+                <input type="text" id="estado" name="estado" required class="w-full p-2 mb-4 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                
+                <label for="fecha" class="block mb-2 font-medium">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required class="w-full p-2 mb-4 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                
+                <button type="submit" class="w-full p-2.5 bg-blue-600 hover:bg-blue-800 text-white rounded transition-colors duration-300">
+                    Agregar
+                </button>
             </form>
         </div>
     </div>
