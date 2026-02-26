@@ -23,3 +23,4 @@ export const facturas = [
     { id: 14, numeroFactura: "F014", descripcion: "Mantenimiento de equipos de aire acondicionado", estado: "pagada", fecha: "27-04-2024" },
     { id: 15, numeroFactura: "F015", descripcion: "Compra de insumos médicos", estado: "pendiente", fecha: "30-04-2024" }
 ];
+
