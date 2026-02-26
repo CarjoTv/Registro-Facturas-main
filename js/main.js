@@ -1,4 +1,6 @@
-import { facturas } from "./utilties.js";
+import { facturas as facturasIniciales } from "./utilties.js";
+
+let facturas = JSON.parse(localStorage.getItem("mis_facturas")) || facturasIniciales;
 
 /**
  * @description Este punto constara de varias partes:
@@ -153,6 +155,7 @@ function agregarFactura(e) {
 
   facturas.push(nuevaFactura);
   todos();
+  guardarEnLocalStorage();
   toggleModal();
   form.reset();
 }
@@ -171,6 +174,7 @@ form.addEventListener("submit", agregarFactura);
   if (index !== -1) {
     facturas.splice(index, 1);
     todos();
+    guardarEnLocalStorage();
   }
 }
  addEventListener("click", (e) => {
@@ -181,3 +185,7 @@ form.addEventListener("submit", agregarFactura);
 });
 
 
+function guardarEnLocalStorage() {
+  // Convertimos el array a String porque localStorage solo guarda texto
+  localStorage.setItem("mis_facturas", JSON.stringify(facturas));
+}
